@@ -1,0 +1,10 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>Insight</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content>
+  <h1>{{ articleData?.title }}</h1>
+  <div [innerHTML]="articleData?.html"></div>
+</ion-content>
