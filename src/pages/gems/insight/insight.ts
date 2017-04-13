@@ -13,14 +13,23 @@ import * as _ from 'underscore';
 export class InsightPage implements OnInit {
   allArticles: any;
   articles: any;
+  unreadArticles: any;
+  tags: any;
+
   articleTemplate: string;
   currentPageClass: any;
+  displayType: string;
+  showSearch: boolean;
+  showOptions: boolean;
 
   constructor(public navCtrl: NavController, public insightService: InsightService) {
     this.currentPageClass = this;
     this.articleTemplate = `
-    <button *ngIf="item.type === 'ARTICLE'" ion-item (click)="currentPageClass.showArticle(item)">{{item.title}}</button>
+    <ion-item *ngIf="item.type === 'ARTICLE'" ion-item (click)="currentPageClass.showArticle(item)">{{item.title}}</ion-item>
     `;
+    this.displayType = 'articles';
+    this.showSearch = false;
+    this.showOptions = false;
   }
 
   ngOnInit() {
@@ -43,6 +52,11 @@ export class InsightPage implements OnInit {
       });
       this.allArticles = sections;
       this.articles = this.allArticles;
+      this.unreadArticles = this.allArticles.slice(1, 30);
+    });
+
+    this.insightService.getTags().subscribe(data => {
+      this.tags = data;
     });
   }
 
@@ -61,5 +75,13 @@ export class InsightPage implements OnInit {
     this.navCtrl.push(ArticlePage, {
       article: article
     });
+  }
+
+  toggleSearch() {
+    this.showSearch = !this.showSearch;
+  }
+
+  toggleOptions() {
+    this.showOptions = !this.showOptions;
   }
 }

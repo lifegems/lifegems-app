@@ -27,4 +27,29 @@ export class InsightService {
     let filepath = `./data/it/${title}.json`;
     return this._http.get(filepath).map(response => response.json());
   }
+
+
+  getTags() {
+    return new Observable(observer => {
+      observer.next([
+        {
+          title: 'People',
+          type: 'ARTICLE'
+        },
+        {
+          title: 'Kings of Judah',
+          type: 'ARTICLE'
+        },
+        {
+          title: 'Places',
+          type: 'ARTICLE'
+        },
+        {
+          title: 'Prophecies',
+          type: 'ARTICLE'
+        }
+      ]);
+      observer.complete();
+    });
+  }
 }
