@@ -13,9 +13,14 @@ import * as _ from 'underscore';
 export class InsightPage implements OnInit {
   allArticles: any;
   articles: any;
+  articleTemplate: string;
+  currentPageClass: any;
 
   constructor(public navCtrl: NavController, public insightService: InsightService) {
-
+    this.currentPageClass = this;
+    this.articleTemplate = `
+    <button *ngIf="item.type === 'ARTICLE'" ion-item (click)="currentPageClass.showArticle(item)">{{item.title}}</button>
+    `;
   }
 
   ngOnInit() {
@@ -30,7 +35,8 @@ export class InsightPage implements OnInit {
         });
         _.each(_.values(section.articles), (article) => {
           sections.push({
-            title: article.title,
+            title: article.title.replace("ʽ","").replace("ʼ",""),
+            name: article.title,
             type: 'ARTICLE'
           });
         });

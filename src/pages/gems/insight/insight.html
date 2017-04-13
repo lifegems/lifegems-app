@@ -6,10 +6,17 @@
 
 <ion-content>
   <ion-searchbar (ionInput)="filterItems($event)"></ion-searchbar>
-  <ion-item-group>
+  <!--<ion-item-group>
     <div *ngFor="let item of articles">
       <ion-item-divider *ngIf="item.type === 'SECTION'" color="light">{{item.title}}</ion-item-divider>
       <button *ngIf="item.type === 'ARTICLE'" ion-item (click)="showArticle(item)">{{item.title}}</button>
     </div>
-  </ion-item-group>
+  </ion-item-group>-->
+  <ion-alpha-scroll 
+    *ngIf="articles" 
+    [listData]="articles" 
+    key="title"
+    [currentPageClass]="currentPageClass"
+    [itemTemplate]="articleTemplate">
+  </ion-alpha-scroll>
 </ion-content>

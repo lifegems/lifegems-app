@@ -6,6 +6,7 @@ import { MyApp } from './app.component';
 
 import { PagesModule } from '../pages';
 
+import { IonicStorageModule } from '@ionic/storage';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 
@@ -17,8 +18,9 @@ import { SplashScreen } from '@ionic-native/splash-screen';
     PagesModule,
     BrowserModule,
     IonicModule.forRoot(MyApp),
+    IonicStorageModule.forRoot(),
     HttpModule,
-    JsonpModule
+    JsonpModule,
   ],
   bootstrap: [IonicApp],
   entryComponents: [
