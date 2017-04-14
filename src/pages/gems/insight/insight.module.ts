@@ -5,6 +5,7 @@ import { IonicApp, IonicModule, IonicErrorHandler } from 'ionic-angular';
 import { InsightPage } from './insight';
 import { ArticlePage } from './article/article';
 import { InsightService } from './insight.service';
+import { TagsService } from './tags.service';
 import { TopicListPage } from './topic-list/topic-list';
 
 @NgModule({
@@ -24,7 +25,8 @@ import { TopicListPage } from './topic-list/topic-list';
     // IonAlphaScrollModule
   ],
   providers: [
-    InsightService
+    InsightService,
+    TagsService
   ]
 })
 export class InsightModule {}

@@ -1,3 +1,9 @@
-page-gems-insight-article h1 {
-  color: red;
+page-gems-insight-article ion-content * {
+  background-color: #FFFFFF;
+  color: #737B7F;
+}
+
+strong {
+  padding-top: 15px;
+  display: block;
 }

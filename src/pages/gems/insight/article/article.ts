@@ -3,6 +3,7 @@ import { NavController, NavParams } from 'ionic-angular';
 import { Storage } from '@ionic/storage';
 
 import { InsightService } from '../insight.service';
+import { Tag,TagsService } from '../tags.service';
 
 @Component({
   selector: 'page-gems-insight-article',
@@ -11,8 +12,14 @@ import { InsightService } from '../insight.service';
 export class ArticlePage implements OnInit {
   article: any;
   articleData: any;
+  tags: any;
+  tagname: string;
 
-  constructor(public navCtrl: NavController, private navParams: NavParams, public insightService: InsightService, private storage: Storage) {
+  constructor(public navCtrl: NavController,
+    private navParams: NavParams, 
+    public insightService: InsightService, 
+    private storage: Storage,
+    private tagsService: TagsService) {
     this.article = this.navParams.get('article');
   }
 
@@ -30,5 +37,14 @@ export class ArticlePage implements OnInit {
         this.articleData = JSON.parse(this.articleData);
       }
     });
+
+    this.tagsService.getArticleTags(this.article.title).subscribe(tags => this.tags);
+  }
+
+  addTag() {
+    let tag = new Tag();
+    tag.name = this.tagname;
+    tag.article = this.article.title;
+    this.tagsService.saveTag(tag);
   }
 }

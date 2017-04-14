@@ -1,10 +1,19 @@
 <ion-header>
   <ion-navbar>
     <ion-title>Insight</ion-title>
+    <ion-buttons end>
+      <button ion-button icon-only color="royal">
+        <ion-icon name="md-add"></ion-icon>
+      </button>
+    </ion-buttons>
   </ion-navbar>
 </ion-header>
 
-<ion-content>
+<ion-content padding>
+  <a href="#" *ngFor="let tag of tags">{{tag.name}}</a>
   <h1>{{ articleData?.title }}</h1>
   <div [innerHTML]="articleData?.html"></div>
+
+  <ion-input value="tagname" [(ngModel)]="tagname"></ion-input>
+  <button ion-button (click)="addTag()">Add Tag</button>
 </ion-content>
