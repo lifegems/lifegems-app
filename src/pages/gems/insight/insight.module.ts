@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { IonicApp, IonicModule, IonicErrorHandler } from 'ionic-angular';
-import { IonAlphaScrollModule } from 'ionic2-alpha-scroll';
+// import { IonAlphaScrollModule } from 'ionic2-alpha-scroll';
 
 import { InsightPage } from './insight';
 import { ArticlePage } from './article/article';
@@ -18,7 +18,7 @@ import { InsightService } from './insight.service';
   ],
   imports: [
     IonicModule,
-    IonAlphaScrollModule
+    // IonAlphaScrollModule
   ],
   providers: [
     InsightService
