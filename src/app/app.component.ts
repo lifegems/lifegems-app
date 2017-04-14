@@ -28,11 +28,11 @@ export class MyApp {
 
   importMasterData() {
     this.storage.ready().then(() => {
-      this.storage.get('insight').then(data => {
+      this.storage.get('insight.sections').then(data => {
         if (data) return;
-        this._http.get("./data/it/it.json").map(response => response.json()).subscribe((data) => {
+        this._http.get("./data/it/sections/sections.json").map(response => response.json()).subscribe((data) => {
           console.log("loading data");
-          this.storage.set('insight', JSON.stringify(data));
+          this.storage.set('insight.sections', JSON.stringify(data));
         });
       });
     });

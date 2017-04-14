@@ -1,0 +1,23 @@
+
+<ion-header>
+  <ion-navbar>
+    <ion-title>{{topic?.title||Insight}}</ion-title>
+    <ion-buttons end>
+      <button ion-button icon-only color="royal" (click)="toggleSearch()">
+        <ion-icon name="search"></ion-icon>
+      </button>
+      <button ion-button icon-only color="royal" (click)="toggleOptions()">
+        <ion-icon name="md-options"></ion-icon>
+      </button>
+    </ion-buttons>
+  </ion-navbar>
+</ion-header>
+
+<ion-content>
+  <ion-searchbar (ionInput)="filterItems($event)"></ion-searchbar>
+  <ion-item-group>
+    <div *ngFor="let article of articles">
+      <button ion-item (click)="showArticle(article)">{{article.title}}</button>
+    </div>
+  </ion-item-group>
+</ion-content>

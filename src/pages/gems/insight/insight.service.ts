@@ -10,11 +10,10 @@ import 'rxjs/add/operator/map';
 export class InsightService {
   constructor(private _http: Http, private storage: Storage) {}
 
-  getArticles() {
-    // return this._http.get("./data/it/it.json").map(response => response.json());
+  getSections() {
     return new Observable(observer => {
       this.storage.ready().then(() => {
-        this.storage.get('insight').then(data => {
+        this.storage.get('insight.sections').then(data => {
           observer.next(JSON.parse(data));
           observer.complete();
         });
@@ -25,6 +24,11 @@ export class InsightService {
 
   getArticle(title) {
     let filepath = `./data/it/${title}.json`;
+    return this._http.get(filepath).map(response => response.json());
+  }
+
+  getArticles(section) {
+    let filepath = `./data/it/sections/${section}.json`;
     return this._http.get(filepath).map(response => response.json());
   }
 

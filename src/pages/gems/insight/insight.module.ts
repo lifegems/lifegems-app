@@ -5,16 +5,19 @@ import { IonicApp, IonicModule, IonicErrorHandler } from 'ionic-angular';
 import { InsightPage } from './insight';
 import { ArticlePage } from './article/article';
 import { InsightService } from './insight.service';
+import { TopicListPage } from './topic-list/topic-list';
 
 @NgModule({
   declarations: [
     InsightPage,
-    ArticlePage
+    ArticlePage,
+    TopicListPage
   ],
   exports: [],
   entryComponents: [
     InsightPage,
-    ArticlePage
+    ArticlePage,
+    TopicListPage
   ],
   imports: [
     IonicModule,

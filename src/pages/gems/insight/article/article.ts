@@ -10,21 +10,19 @@ import { InsightService } from '../insight.service';
 })
 export class ArticlePage implements OnInit {
   article: any;
-  name: string;
   articleData: any;
 
   constructor(public navCtrl: NavController, private navParams: NavParams, public insightService: InsightService, private storage: Storage) {
     this.article = this.navParams.get('article');
-    this.name = this.article.name;
   }
 
   ngOnInit() {
     this.storage.ready().then(
-      () => this.storage.get(`insight.articles.${this.name}`)
+      () => this.storage.get(`insight.articles.${this.article.title}`)
     ).then((data) => {
       if (!data) {
-        this.insightService.getArticle(this.name).subscribe(data => {
-          this.storage.set(`insight.articles.${this.name}`, JSON.stringify(data));
+        this.insightService.getArticle(this.article.title).subscribe(data => {
+          this.storage.set(`insight.articles.${this.article.title}`, JSON.stringify(data));
           this.articleData = data;
         });
       } else {

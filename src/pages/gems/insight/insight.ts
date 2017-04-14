@@ -3,6 +3,7 @@ import { NavController } from 'ionic-angular';
 
 import { InsightService } from './insight.service';
 import { ArticlePage } from './article/article';
+import { TopicListPage } from './topic-list/topic-list';
 
 import * as _ from 'underscore';
 
@@ -15,6 +16,7 @@ export class InsightPage implements OnInit {
   articles: any;
   unreadArticles: any;
   tags: any;
+  sections: any[];
 
   articleTemplate: string;
   currentPageClass: any;
@@ -33,42 +35,41 @@ export class InsightPage implements OnInit {
   }
 
   ngOnInit() {
-    this.insightService.getArticles().subscribe(data => {
-      let aData = _.sortBy(data, item => item.title);
-
-      let sections = [];
-      _.each(_.values(aData), (section) => {
-        sections.push({
-          title: section.title,
-          type: 'SECTION'
-        });
-        _.each(_.values(section.articles), (article) => {
-          sections.push({
-            title: article.title.replace("ʽ","").replace("ʼ",""),
-            name: article.title,
-            type: 'ARTICLE'
-          });
-        });
-      });
-      this.allArticles = sections;
-      this.articles = this.allArticles;
-      this.unreadArticles = this.allArticles.slice(1, 30);
+    this.insightService.getSections().subscribe(data => {
+      this.sections = _.values(data);
     });
+    // this.insightService.getArticles().subscribe(data => {
+    //   let aData = _.sortBy(data, item => item.title);
+
+    //   let sections = [];
+    //   _.each(_.values(aData), (section) => {
+    //     sections.push({
+    //       title: section.title,
+    //       type: 'SECTION'
+    //     });
+    //     _.each(_.values(section.articles), (article) => {
+    //       sections.push({
+    //         title: article.title.replace("ʽ","").replace("ʼ",""),
+    //         name: article.title,
+    //         type: 'ARTICLE'
+    //       });
+    //     });
+    //   });
+    //   this.allArticles = sections;
+    //   this.articles = this.allArticles;
+    //   this.unreadArticles = this.allArticles.slice(1, 30);
+    // });
 
     this.insightService.getTags().subscribe(data => {
       this.tags = data;
     });
   }
 
-  filterItems(ev: any) {
-    this.articles = this.allArticles;
-
-    let val = ev.target.value;
-    if (val && val.trim() != '') {
-      this.articles = this.articles.filter(item => {
-        return (item.title.toLowerCase().indexOf(val.toLowerCase()) > -1) || (item.type === 'SECTION');
-      });
-    }
+  showSection(section: any) {
+    console.log("initiating topic list");
+    this.navCtrl.push(TopicListPage, {
+      topic: section
+    });
   }
 
   showArticle(article: any) {
