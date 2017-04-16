@@ -1,0 +1,15 @@
+
+<ion-header>
+  <ion-navbar>
+    <ion-title>{{tag.name}}</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content>
+  <!--<ion-searchbar (ionInput)="filterItems($event)"></ion-searchbar>-->
+  <ion-item-group>
+    <div *ngFor="let tag of tags">
+      <button ion-item (click)="showArticle(tag.article)">{{tag.article}}</button>
+    </div>
+  </ion-item-group>
+</ion-content>

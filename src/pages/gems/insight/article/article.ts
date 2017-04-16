@@ -4,6 +4,7 @@ import { Storage } from '@ionic/storage';
 
 import { InsightService } from '../insight.service';
 import { Tag,TagsService } from '../tags.service';
+import { TagListPage } from '../tag-list/tag-list';
 
 @Component({
   selector: 'page-gems-insight-article',
@@ -12,6 +13,7 @@ import { Tag,TagsService } from '../tags.service';
 export class ArticlePage implements OnInit {
   article: any;
   articleData: any;
+  isTagEntryShown: boolean;
   tags: any;
   tagname: string;
 
@@ -21,6 +23,7 @@ export class ArticlePage implements OnInit {
     private storage: Storage,
     private tagsService: TagsService) {
     this.article = this.navParams.get('article');
+    this.isTagEntryShown = false;
   }
 
   ngOnInit() {
@@ -38,13 +41,35 @@ export class ArticlePage implements OnInit {
       }
     });
 
-    this.tagsService.getArticleTags(this.article.title).subscribe(tags => this.tags);
+    this.tagsService.getArticleTags(this.article.title).subscribe(tags => {
+      this.tags = tags;
+    });
+  }
+  
+  showTagEntry() {
+    this.isTagEntryShown = !this.isTagEntryShown;
   }
 
   addTag() {
     let tag = new Tag();
     tag.name = this.tagname;
     tag.article = this.article.title;
+    this.tags.push({
+      name: tag.name,
+      article: tag.article
+    });
     this.tagsService.saveTag(tag);
+    this.tagname = "";
+    this.isTagEntryShown = false;
+  }
+  
+  reset() {
+   this.tagsService.resetTags();
+  }
+
+  viewTag(tag) {
+    this.navCtrl.push(TagListPage, {
+      tag: tag
+    });
   }
 }

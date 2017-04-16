@@ -1,0 +1,10 @@
+{
+    "jscodehints.detectedExclusions": [
+        "/Users/appstester/Google Drive/code/lifegems-app/plugins/cordova-sqlite-storage/spec/www/spec/db-tx-sql-features-test.js",
+        "/Users/appstester/Google Drive/code/lifegems-app/plugins/cordova-sqlite-storage/spec/www/spec/db-tx-error-handling-test.js",
+        "/Users/appstester/Google Drive/code/lifegems-app/plugins/cordova-sqlite-storage/spec/www/spec/db-tx-error-mapping-test.js",
+        "/Users/appstester/Google Drive/code/lifegems-app/plugins/cordova-sqlite-storage/spec/www/spec/db-tx-multiple-update-test.js",
+        "/Users/appstester/Google Drive/code/lifegems-app/plugins/cordova-sqlite-storage/spec/www/spec/db-tx-sql-select-value-test.js",
+        "/Users/appstester/Google Drive/code/lifegems-app/plugins/cordova-sqlite-storage/spec/www/spec/db-tx-string-test.js"
+    ]
+}

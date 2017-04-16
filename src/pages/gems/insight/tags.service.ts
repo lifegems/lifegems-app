@@ -11,7 +11,7 @@ export class TagsService {
   getTags() {
     return new Observable(observer => {
       this.storage.get('tags').then(data => {
-        observer.next(JSON.parse(data));
+        observer.next(data.tags);
         observer.complete();
       });
     });
@@ -19,11 +19,18 @@ export class TagsService {
 
   getArticleTags(articleName) {
     return new Observable(observer => {
-      this.storage.set('tags', []);
       this.storage.get('tags').then(data => {
-        let tags = _.filter(JSON.parse(data), (tag) => {
-          return tag.article === articleName;
+        let tags = _.map(data.tags, (tag) => {
+          let aTag = tag.split(".");
+          return {
+             name: aTag[0],
+             article: aTag[1]
+          };
         });
+        tags = _.filter(tags, (tag) => {
+           return tag.article === articleName
+        });
+        console.log(tags);
         observer.next(tags);
         observer.complete();
       });
@@ -32,14 +39,24 @@ export class TagsService {
 
   saveTag(tag: Tag) {
     this.storage.get('tags').then(data => {
-      let tags = (data) ? JSON.parse(data) : [];
-      tags.push(tag);
-      this.storage.set('tags', JSON.stringify(tags));
+      let oTags = (data) ? data : {tags:[]};
+      oTags.tags.push(tag.toString());
+      this.storage.set('tags', oTags);
+      console.log(oTags);
     });
+  }
+   
+  resetTags() {
+     let tags = {tags: []};
+     this.storage.set('tags', JSON.stringify(tags));
   }
 }
 
 export class Tag {
   public name: string;
   public article: string;
+
+  public toString() {
+     return `${this.name}.${this.article}`;
+  }
 }
