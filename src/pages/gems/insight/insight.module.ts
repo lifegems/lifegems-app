@@ -3,7 +3,7 @@ import { IonicApp, IonicModule, IonicErrorHandler } from 'ionic-angular';
 // import { IonAlphaScrollModule } from 'ionic2-alpha-scroll';
 
 import { InsightPage, TagsModal } from './insight';
-import { ArticlePage } from './article/article';
+import { ArticlePage, ArticleTagsModal } from './article/article';
 import { InsightService } from './insight.service';
 import { TagsService } from './tags.service';
 import { TopicListPage } from './topic-list/topic-list';
@@ -15,7 +15,8 @@ import { TagListPage } from './tag-list/tag-list';
     ArticlePage,
     TopicListPage,
     TagListPage,
-    TagsModal
+    TagsModal,
+    ArticleTagsModal
   ],
   exports: [],
   entryComponents: [
@@ -23,7 +24,8 @@ import { TagListPage } from './tag-list/tag-list';
     ArticlePage,
     TopicListPage,
     TagListPage,
-    TagsModal
+    TagsModal,
+    ArticleTagsModal
   ],
   imports: [
     IonicModule,

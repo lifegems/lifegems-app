@@ -1,17 +1,18 @@
 <ion-header>
-  <ion-navbar>
-    <ion-title>Insight</ion-title>
-  </ion-navbar>
+  <ion-toolbar>
+    <ion-title>
+      Insight
+    </ion-title>
+    <ion-buttons end>
+      <button ion-button icon-only color="royal" (click)="showTagList()">
+        <ion-icon name="md-add"></ion-icon>
+      </button>
+    </ion-buttons>
+  </ion-toolbar>
 </ion-header>
 
 <ion-content padding>
   <a class="tag" href="#" *ngFor="let tag of tags" (click)="viewTag(tag)">{{tag.name}}</a>
-  <a (click)="showTagEntry()">
-     <ion-icon name="md-add-circle"></ion-icon>
-  </a>
-
-  <ion-input *ngIf="isTagEntryShown" placeholder="tag name" value="tagname" [(ngModel)]="tagname"></ion-input>
-  <button *ngIf="isTagEntryShown" ion-button (click)="addTag()">Add Tag</button>
   
   <h1>{{ articleData?.title }}</h1>
   <div [innerHTML]="articleData?.html"></div>

@@ -37,12 +37,17 @@ export class TagsService {
     }); 
   }
 
+  saveTags(tags: Tag[]) {
+    _.each(tags, tag => {
+      this.saveTag(tag);
+    });
+  }
+
   saveTag(tag: Tag) {
     this.storage.get('tags').then(data => {
       let oTags = (data) ? data : {tags:[]};
       oTags.tags.push(tag.toString());
       this.storage.set('tags', oTags);
-      console.log(oTags);
     });
   }
    
