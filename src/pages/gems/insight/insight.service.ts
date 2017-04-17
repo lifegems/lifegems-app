@@ -4,6 +4,8 @@ import { Storage } from '@ionic/storage';
 
 import { Observable } from 'rxjs/Observable';
 import { Subject } from 'rxjs/Subject';
+import { Articles } from '../../../app/data/it/it';
+import * as _ from 'underscore';
 import 'rxjs/add/operator/map';
 
 @Injectable()
@@ -12,12 +14,12 @@ export class InsightService {
 
   getSections() {
     return new Observable(observer => {
-      this.storage.ready().then(() => {
-        this.storage.get('insight.sections').then(data => {
-          observer.next(JSON.parse(data));
-          observer.complete();
-        });
-      });
+      let sections = _.sortBy(_.values(Articles), item => item.title);
+      let lastSection = _.find(sections, item => item.title === 'Supplement');
+      sections = _.filter(sections, item => item.title !== 'Supplement');
+      sections.push(lastSection);
+      observer.next(sections);
+      observer.complete();
     });
   }
 
@@ -28,31 +30,9 @@ export class InsightService {
   }
 
   getArticles(section) {
-    let filepath = `./data/it/sections/${section}.json`;
-    return this._http.get(filepath).map(response => response.json());
-  }
-
-
-  getTags() {
     return new Observable(observer => {
-      observer.next([
-        {
-          title: 'People',
-          type: 'ARTICLE'
-        },
-        {
-          title: 'Kings of Judah',
-          type: 'ARTICLE'
-        },
-        {
-          title: 'Places',
-          type: 'ARTICLE'
-        },
-        {
-          title: 'Prophecies',
-          type: 'ARTICLE'
-        }
-      ]);
+      let articles = _.sortBy(_.values(Articles[section].articles), item => item.title);
+      observer.next(articles);
       observer.complete();
     });
   }

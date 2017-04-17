@@ -12,7 +12,7 @@ import * as _ from 'underscore';
 export class TopicListPage implements OnInit {
   topic: any;
   callback: any;
-  articles: any[];
+  articles: any;
   allArticles: any[];
 
   constructor(public navCtrl: NavController, private navParams: NavParams, private insightService: InsightService) {

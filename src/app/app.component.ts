@@ -18,23 +18,7 @@ export class MyApp {
       // Okay, so the platform is ready and our plugins are available.
       // Here you can do any higher level native things you might need.
       statusBar.styleDefault();
-      setTimeout(() => {
-        splashScreen.hide();
-      }, 100);      
-      this.importMasterData();
-      console.log("loading complete");
-    });
-  }
-
-  importMasterData() {
-    this.storage.ready().then(() => {
-      this.storage.get('insight.sections').then(data => {
-        if (data) return;
-        this._http.get("./data/it/sections/sections.json").map(response => response.json()).subscribe((data) => {
-          console.log("loading data");
-          this.storage.set('insight.sections', JSON.stringify(data));
-        });
-      });
+      splashScreen.hide();
     });
   }
 }

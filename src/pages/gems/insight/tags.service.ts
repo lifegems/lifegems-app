@@ -30,7 +30,6 @@ export class TagsService {
         tags = _.filter(tags, (tag) => {
            return tag.article === articleName
         });
-        console.log(tags);
         observer.next(tags);
         observer.complete();
       });
@@ -45,9 +44,26 @@ export class TagsService {
 
   saveTag(tag: Tag) {
     this.storage.get('tags').then(data => {
-      let oTags = (data) ? data : {tags:[]};
-      oTags.tags.push(tag.toString());
-      this.storage.set('tags', oTags);
+      let oTags = (data && data.tags) ? data : {tags:[]};
+      if (_.indexOf(oTags.tags, tag.toString()) === -1) {
+        oTags.tags.push(tag.toString());
+        this.storage.set('tags', oTags);
+      }
+    });
+  }
+
+  deleteTags(tags: Tag[]) {
+    _.each(tags, tag => {
+      this.deleteTag(tag);
+    });
+  }
+
+  deleteTag(tag: Tag) {
+    this.storage.get('tags').then(data => {
+      if (_.indexOf(data.tags, tag.toString()) > -1) {
+        let oTags = _.filter(data.tags, item => (tag.toString() !== item));
+        this.storage.set('tags', {tags:oTags});
+      }
     });
   }
    
@@ -58,8 +74,7 @@ export class TagsService {
 }
 
 export class Tag {
-  public name: string;
-  public article: string;
+  constructor(public name: string, public article: string) {}
 
   public toString() {
      return `${this.name}.${this.article}`;

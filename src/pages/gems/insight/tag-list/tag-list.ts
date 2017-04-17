@@ -23,7 +23,7 @@ export class TagListPage implements OnInit {
 
   ngOnInit() {
     this.tagsService.getTags().subscribe(tags => {
-      this.tags = _.filter(_.map(tags, tag => {
+      this.tags = _.sortBy(_.filter(_.map(tags, tag => {
         let aTag = tag.split(".");
         return {
           name: aTag[0],
@@ -31,7 +31,7 @@ export class TagListPage implements OnInit {
         };
       }), tag => {
         return (tag.name === this.tag.name);
-      });
+      }), tag => tag.name);
     });
   }
 

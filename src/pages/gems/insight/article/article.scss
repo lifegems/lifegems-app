@@ -1,12 +1,20 @@
-page-gems-insight-article ion-content * {
-//  color: #737B7F;
-}
-
 strong {
   padding-top: 15px;
   display: block;
 }
 
+h1 {
+  display: block;
+  clear: left;
+  padding-top: 10px;
+}
+
 .tag {
-   padding: 3px;
+  padding: 5px;
+  text-decoration: none;
+  margin: 3px;
+  color: white;
+  background-color: #387ef8;
+  border-radius: 7px;
+  float: left;
 }
