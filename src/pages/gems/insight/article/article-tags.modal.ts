@@ -60,14 +60,26 @@ export class ArticleTagsModal implements OnInit {
    ngOnInit() {
       this.article = this.navParams.get('article');
       this.tagsService.getTags().subscribe(data => {
-         this.tags = _.map(data, tag => {
+         let tags = _.map(data, tag => {
             let aTag = tag.split(".");
             return {
                name: aTag[0],
-               article: aTag[1],
-               isSelected: aTag[1] === this.article.title
+               article: aTag[1]
             }
-         })
+         });
+         let allTags = _.uniq(_.pluck(tags, 'name'));
+         let articleTags = _.pluck(_.filter(tags, tag => {
+            return tag.article === this.article.title;
+         }), 'name');
+         console.log(allTags);
+         console.log(articleTags);
+         this.tags = _.map(allTags, tag => {
+            return {
+               name: tag,
+               article: this.article.title,
+               isSelected: (_.indexOf(articleTags, tag) > -1) 
+            };
+         });
       });
    }
 
