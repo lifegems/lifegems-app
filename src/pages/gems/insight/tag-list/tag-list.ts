@@ -31,7 +31,7 @@ export class TagListPage implements OnInit {
         };
       }), tag => {
         return (tag.name === this.tag.name);
-      }), tag => tag.name);
+      }), tag => tag.article);
     });
   }
 
