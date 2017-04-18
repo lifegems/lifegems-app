@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { IonicApp, IonicModule, IonicErrorHandler } from 'ionic-angular';
 
 import { TabsPage } from './tabs/tabs';
-import { GemsModule } from './gems/gems.module';
+import { GemsModule } from './gems';
 import { HomePage } from './home/home';
 import { SettingsPage } from './settings/settings';
 import { InsightService } from './insight.service';
