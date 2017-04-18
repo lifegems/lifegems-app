@@ -4,7 +4,7 @@ import { IonicApp, IonicModule, IonicErrorHandler } from 'ionic-angular';
 import { InsightPage } from './insight';
 import { ArticlePage } from './article';
 import { ArticleTagsModal, TagsModal } from './modals';
-import { TopicListPage } from './topic-list/topic-list';
+import { TopicListPage } from './topic-list';
 import { TagListPage } from './tag-list';
 
 @NgModule({
