@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { IonicApp, IonicModule, IonicErrorHandler } from 'ionic-angular';
 
 import { GemsPage } from './gems';
-import { InsightModule } from './insight/insight.module';
+import { InsightModule } from './insight';
 
 @NgModule({
   declarations: [
