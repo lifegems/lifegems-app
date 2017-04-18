@@ -3,7 +3,7 @@ import { NavController, ModalController, ViewController } from 'ionic-angular';
 
 import { InsightService } from '../../insight.service';
 import { TagsService } from '../../tags.service';
-import { ArticlePage } from './article/article';
+import { ArticlePage } from './article';
 import { TopicListPage } from './topic-list/topic-list';
 import { TagListPage } from './tag-list/tag-list';
 
@@ -20,20 +20,9 @@ export class InsightPage implements OnInit {
   tags: any;
   sections: any[];
 
-  articleTemplate: string;
-  currentPageClass: any;
-  displayType: string;
-  showSearch: boolean;
-
   constructor(public navCtrl: NavController, 
       public insightService: InsightService, 
       public modalCtrl: ModalController) {
-    this.currentPageClass = this;
-    this.articleTemplate = `
-    <ion-item *ngIf="item.type === 'ARTICLE'" ion-item (click)="currentPageClass.showArticle(item)">{{item.title}}</ion-item>
-    `;
-    this.displayType = 'articles';
-    this.showSearch = false;
   }
 
   ngOnInit() {
@@ -43,7 +32,6 @@ export class InsightPage implements OnInit {
   }
 
   showSection(section: any) {
-    console.log("initiating topic list");
     this.navCtrl.push(TopicListPage, {
       topic: section
     });
@@ -53,10 +41,6 @@ export class InsightPage implements OnInit {
     this.navCtrl.push(ArticlePage, {
       article: article
     });
-  }
-
-  toggleSearch() {
-    this.showSearch = !this.showSearch;
   }
 
   showTags() {

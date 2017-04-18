@@ -3,7 +3,7 @@ import { NavController, NavParams } from 'ionic-angular';
 
 import { InsightService } from '../../../insight.service';
 import { TagsService } from '../../../tags.service';
-import { ArticlePage } from '../article/article';
+import { ArticlePage } from '../article';
 import * as _ from 'underscore';
 
 @Component({

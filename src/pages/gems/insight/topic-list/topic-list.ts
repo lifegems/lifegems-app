@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
 
 import { InsightService } from '../../../insight.service';
-import { ArticlePage } from '../article/article';
+import { ArticlePage } from '../article';
 import * as _ from 'underscore';
 
 @Component({
