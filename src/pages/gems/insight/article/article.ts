@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { NavController, NavParams, ViewController, ModalController } from 'ionic-angular';
+import { NavController, NavParams, ViewController, ModalController, ToastController } from 'ionic-angular';
 import { Storage } from '@ionic/storage';
 
 import { InsightService } from '../insight.service';
@@ -17,15 +17,17 @@ export class ArticlePage implements OnInit {
   article: any;
   articleData: any;
   tags: any;
+  isRead: boolean;
 
   constructor(public navCtrl: NavController,
       private navParams: NavParams, 
       public insightService: InsightService, 
       private storage: Storage,
       private tagsService: TagsService, 
-      public modalCtrl: ModalController) {
+      public modalCtrl: ModalController,
+      private toastCtrl: ToastController) {
     this.article = this.navParams.get('article');
-    console.log(this.article);
+    this.isRead = false;
   }
 
   ngOnInit() {
@@ -53,6 +55,16 @@ export class ArticlePage implements OnInit {
     this.tagsService.getArticleTags(this.article.title).subscribe(tags => {
       this.tags = tags;
     });
+  }
+
+  markAsRead() {
+    this.isRead = !this.isRead;
+    let toast = this.toastCtrl.create({
+      message: (this.isRead) ? "Marked as read" : "Marked as unread",
+      duration: 1000,
+      position: 'middle'
+    });
+    toast.present();
   }
 
   viewTag(tag) {

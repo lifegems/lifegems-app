@@ -10,7 +10,8 @@
     </ion-buttons>
     <ion-buttons end>
       <button ion-button icon-only color="royal" (click)="markAsRead()">
-        <ion-icon name="md-checkmark"></ion-icon>
+        <ion-icon *ngIf="!isRead" name="md-checkmark"></ion-icon>
+        <ion-icon *ngIf="isRead" color="secondary" name="md-checkmark-circle"></ion-icon>
       </button>
       <button ion-button icon-only color="royal" (click)="showTagList()">
         <ion-icon name="md-add"></ion-icon>
