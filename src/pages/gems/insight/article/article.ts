@@ -25,6 +25,7 @@ export class ArticlePage implements OnInit {
       private tagsService: TagsService, 
       public modalCtrl: ModalController) {
     this.article = this.navParams.get('article');
+    console.log(this.article);
   }
 
   ngOnInit() {

@@ -71,8 +71,6 @@ export class ArticleTagsModal implements OnInit {
          let articleTags = _.pluck(_.filter(tags, tag => {
             return tag.article === this.article.title;
          }), 'name');
-         console.log(allTags);
-         console.log(articleTags);
          this.tags = _.map(allTags, tag => {
             return {
                name: tag,

@@ -9,6 +9,9 @@
       </button>
     </ion-buttons>
     <ion-buttons end>
+      <button ion-button icon-only color="royal" (click)="markAsRead()">
+        <ion-icon name="md-checkmark"></ion-icon>
+      </button>
       <button ion-button icon-only color="royal" (click)="showTagList()">
         <ion-icon name="md-add"></ion-icon>
       </button>
@@ -19,6 +22,12 @@
 <ion-content padding>
   <a class="tag" href="#" *ngFor="let tag of tags" (click)="viewTag(tag)">{{tag.name}}</a>
   
-  <h1>{{ articleData?.title }}</h1>
+  
+  <h1>
+    <a class="wollink" href="http://wol.jw.org{{ articleData?.link }}">
+      {{ articleData?.title }}
+      <ion-icon class="icon--sm" name="md-open"></ion-icon>
+    </a>
+  </h1>
   <div [innerHTML]="articleData?.html"></div>
 </ion-content>
