@@ -5,7 +5,7 @@ import { Observable } from 'rxjs/Observable';
 import * as _ from 'underscore';
 
 @Injectable()
-export class ArticleService {
+export class ReadProgressService {
    public constructor(private storage: Storage) {}
 
    public saveArticleReadStatus(articleName: string, status: boolean) {

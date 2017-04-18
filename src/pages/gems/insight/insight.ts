@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { NavController, ModalController, ViewController } from 'ionic-angular';
 
-import { InsightService } from './insight.service';
-import { TagsService } from './tags.service';
+import { InsightService } from '../../insight.service';
+import { TagsService } from '../../tags.service';
 import { ArticlePage } from './article/article';
 import { TopicListPage } from './topic-list/topic-list';
 import { TagListPage } from './tag-list/tag-list';

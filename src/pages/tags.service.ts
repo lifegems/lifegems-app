@@ -4,6 +4,8 @@ import { Storage } from '@ionic/storage';
 import { Observable } from 'rxjs/Observable';
 import * as _ from 'underscore';
 
+import { Tag } from './gems/insight/tag-list/tag.model';
+
 @Injectable()
 export class TagsService {
   constructor(private storage: Storage) {}
@@ -70,13 +72,5 @@ export class TagsService {
   resetTags() {
      let tags = {tags: []};
      this.storage.set('tags', JSON.stringify(tags));
-  }
-}
-
-export class Tag {
-  constructor(public name: string, public article: string) {}
-
-  public toString() {
-     return `${this.name}.${this.article}`;
   }
 }

@@ -5,6 +5,9 @@ import { TabsPage } from './tabs/tabs';
 import { GemsModule } from './gems/gems.module';
 import { HomePage } from './home/home';
 import { SettingsPage } from './settings/settings';
+import { InsightService } from './insight.service';
+import { ReadProgressService } from './read-progress.service';
+import { TagsService } from './tags.service';
 
 @NgModule({
   declarations: [
@@ -22,6 +25,10 @@ import { SettingsPage } from './settings/settings';
     IonicModule,
     GemsModule
   ],
-  providers: []
+  providers: [
+    InsightService,
+    ReadProgressService,
+    TagsService
+  ]
 })
 export class PagesModule {}

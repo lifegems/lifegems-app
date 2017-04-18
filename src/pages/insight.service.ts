@@ -4,9 +4,10 @@ import { Storage } from '@ionic/storage';
 
 import { Observable } from 'rxjs/Observable';
 import { Subject } from 'rxjs/Subject';
-import { Articles } from '../../../app/data/it/it';
 import * as _ from 'underscore';
 import 'rxjs/add/operator/map';
+
+import { Articles } from '../app/data/it/it';
 
 @Injectable()
 export class InsightService {

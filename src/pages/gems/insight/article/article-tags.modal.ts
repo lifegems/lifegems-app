@@ -2,7 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { NavController, NavParams, ViewController, ModalController, AlertController } from 'ionic-angular';
 
 import { TagListPage } from '../tag-list/tag-list';
-import { TagsService, Tag } from '../tags.service';
+import { Tag } from '../tag-list/tag.model';
+import { TagsService } from '../../../tags.service';
 
 import * as _ from 'underscore';
 

@@ -2,9 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import { NavController, NavParams, ViewController, ModalController, ToastController } from 'ionic-angular';
 import { Storage } from '@ionic/storage';
 
-import { InsightService } from '../insight.service';
-import { Tag,TagsService } from '../tags.service';
+import { InsightService } from '../../../insight.service';
+import { TagsService } from '../../../tags.service';
 import { TagListPage } from '../tag-list/tag-list';
+import { Tag } from '../tag-list/tag.model';
 import { ArticleTagsModal } from './article-tags.modal';
 
 import * as _ from 'underscore';
