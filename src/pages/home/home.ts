@@ -59,12 +59,18 @@ export class HomePage implements OnInit {
       let articles: any[] = _.values(randomSection.articles);
       let maxArticleIndex: number = articles.length - 1;
       this.randomArticle = articles[_.random(maxArticleIndex)];
+      this.readProgressService.isArticleRead('it', this.randomArticle.title).subscribe((readStatus: any) => {
+        this.randomArticle.isRead = readStatus;
+      });
     });
   }
 
   loadReadStatus() {
     this.readProgressService.getReadStatus('it').subscribe((readStatus: any) => {
       this.readArticlesCount = readStatus.complete.length;
+    });
+    this.readProgressService.isArticleRead('it', this.randomArticle.title).subscribe((readStatus: any) => {
+      this.randomArticle.isRead = readStatus;
     });
   }
 

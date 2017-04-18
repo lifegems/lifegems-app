@@ -14,6 +14,9 @@
       Insight Article
       <a (click)="loadRandomArticle()"><ion-icon name="md-shuffle"></ion-icon></a>
     </ion-list-header>
-    <button *ngIf="randomArticle" ion-item (click)="viewArticle(randomArticle)">{{ randomArticle.title }}</button>
+    <button *ngIf="randomArticle" ion-item (click)="viewArticle(randomArticle)">
+      <ion-icon *ngIf="randomArticle.isRead" color="secondary" name="md-checkmark-circle"></ion-icon>
+      {{ randomArticle.title }}
+    </button>
   </ion-list>
 </ion-content>
