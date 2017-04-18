@@ -9,7 +9,10 @@
   <ion-searchbar (ionInput)="filterItems($event)"></ion-searchbar>
   <ion-item-group>
     <div *ngFor="let article of articles">
-      <button ion-item (click)="showArticle(article)">{{article.title}}</button>
+      <button ion-item (click)="showArticle(article)">
+        <ion-icon *ngIf="article.isRead" color="secondary" name="md-checkmark-circle"></ion-icon>
+        {{article.title}}
+      </button>
     </div>
   </ion-item-group>
 </ion-content>

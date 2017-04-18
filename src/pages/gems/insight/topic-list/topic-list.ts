@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
 
 import { InsightService } from '../../../insight.service';
+import { ReadProgressService } from '../../../read-progress.service';
 import { ArticlePage } from '../article';
 import * as _ from 'underscore';
 
@@ -11,18 +12,27 @@ import * as _ from 'underscore';
 })
 export class TopicListPage implements OnInit {
   topic: any;
-  callback: any;
   articles: any;
   allArticles: any[];
+  searchterm: string;
 
-  constructor(public navCtrl: NavController, private navParams: NavParams, private insightService: InsightService) {
+  constructor(
+    public navCtrl: NavController, 
+    private navParams: NavParams, 
+    private insightService: InsightService,
+    private readProgressService: ReadProgressService) {
     this.topic = this.navParams.get('topic');
   } 
 
   ngOnInit() {
-    this.insightService.getArticles(this.topic.title).subscribe(data => {
-      this.articles = data;
-      this.allArticles = this.articles;
+    this.readProgressService.getReadStatus('it').subscribe((readStatus: any) => {
+      this.insightService.getArticles(this.topic.title).subscribe(data => {
+        this.articles = _.map(data, article => {
+          article.isRead = (_.indexOf(readStatus.complete, article.title) > -1);
+          return article;
+        });
+        this.allArticles = this.articles;
+      });
     });
   }
 
@@ -37,9 +47,22 @@ export class TopicListPage implements OnInit {
     }
   }
 
+  loadReadStatus() {
+    this.readProgressService.getReadStatus('it').subscribe((readStatus: any) => {
+      this.articles = _.map(this.articles, article => {
+        article.isRead = (_.indexOf(readStatus.complete, article.title) > -1);
+        return article;
+      });
+    });
+  }
+
   showArticle(article: any) {
     this.navCtrl.push(ArticlePage, {
       article: article
     });
+  }
+
+  ionViewDidEnter() {
+    this.loadReadStatus();
   }
 }
