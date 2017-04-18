@@ -6,7 +6,7 @@ import { InsightService } from '../../../insight.service';
 import { TagsService } from '../../../tags.service';
 import { TagListPage } from '../tag-list/tag-list';
 import { Tag } from '../tag-list/tag.model';
-import { ArticleTagsModal } from './';
+import { ArticleTagsModal } from '../modals';
 
 import * as _ from 'underscore';
 

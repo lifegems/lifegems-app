@@ -1,11 +1,12 @@
 import { Component, OnInit } from '@angular/core';
-import { NavController, ModalController, ViewController } from 'ionic-angular';
+import { NavController, ModalController } from 'ionic-angular';
 
 import { InsightService } from '../../insight.service';
 import { TagsService } from '../../tags.service';
 import { ArticlePage } from './article';
 import { TopicListPage } from './topic-list/topic-list';
 import { TagListPage } from './tag-list/tag-list';
+import { TagsModal } from './modals';
 
 import * as _ from 'underscore';
 
@@ -50,57 +51,3 @@ export class InsightPage implements OnInit {
 }
 
 
-@Component({
-   template: `
-   <ion-header>
-     <ion-toolbar>
-       <ion-title>
-         Tags
-       </ion-title>
-       <ion-buttons start>
-         <button ion-button (click)="dismiss()">
-           <span ion-text color="primary" showWhen="ios">Cancel</span>
-         </button>
-       </ion-buttons>
-     </ion-toolbar>
-   </ion-header>
-
-   <ion-content>
-     <ion-list>
-      <button ion-item *ngFor="let tag of tags" (click)="showArticles(tag)">
-        {{tag.name}}
-      </button>
-     </ion-list>
-   </ion-content>
-   `,
-   selector: 'modal-tags'
-})
-export class TagsModal implements OnInit {
-   tags: any;
-   
-   constructor(private tagsService: TagsService, public viewCtrl: ViewController, public navCtrl: NavController) {}
-   
-   ngOnInit() {
-      console.log("tags");
-      this.tagsService.getTags().subscribe(data => {
-        this.tags = _.uniq(_.sortBy(_.map(data, tag => {
-          let aTag = tag.split(".");
-          let oTag = {
-            name: aTag[0],
-            article: aTag[1]
-          }
-          return oTag;
-        }), tag => tag.name), tag => tag.name);
-      });
-   }
-   
-   dismiss() {
-      this.viewCtrl.dismiss();
-   }
-
-   showArticles(tag) {
-      this.navCtrl.push(TagListPage, {
-        tag: tag
-      });
-   }
-}
