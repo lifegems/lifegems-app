@@ -4,7 +4,7 @@ import { Storage } from '@ionic/storage';
 import { Observable } from 'rxjs/Observable';
 import * as _ from 'underscore';
 
-import { Tag } from './gems/insight/tag-list/tag.model';
+import { Tag } from './gems/insight/tag-list';
 
 @Injectable()
 export class TagsService {

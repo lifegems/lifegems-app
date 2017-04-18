@@ -4,8 +4,7 @@ import { Storage } from '@ionic/storage';
 
 import { InsightService } from '../../../insight.service';
 import { TagsService } from '../../../tags.service';
-import { TagListPage } from '../tag-list/tag-list';
-import { Tag } from '../tag-list/tag.model';
+import { Tag, TagListPage } from '../tag-list';
 import { ArticleTagsModal } from '../modals';
 
 import * as _ from 'underscore';
