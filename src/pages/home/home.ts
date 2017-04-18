@@ -4,6 +4,7 @@ import * as _ from 'underscore';
 
 import { TagsService } from '../tags.service';
 import { InsightService } from '../insight.service';
+import { ReadProgressService } from '../read-progress.service';
 import { Tag, ArticlePage } from '../gems';
 
 @Component({
@@ -13,12 +14,14 @@ import { Tag, ArticlePage } from '../gems';
 export class HomePage implements OnInit {
   public tags: Tag[];
   public articlesCount: number = 0;
+  public readArticlesCount: number = 0;
   public randomArticle: any;
 
   constructor(
     public navCtrl: NavController, 
     private tagsService: TagsService,
-    private insightService: InsightService) {
+    private insightService: InsightService,
+    private readProgressService: ReadProgressService) {
   }
 
   ngOnInit() {
@@ -30,6 +33,7 @@ export class HomePage implements OnInit {
     });
     this.getArticlesCount();
     this.loadRandomArticle();
+    this.loadReadStatus();
   }
 
   getTaggedArticlesCount() {
@@ -54,7 +58,13 @@ export class HomePage implements OnInit {
       let randomSection: any = sections[_.random(maxSectionIndex)];
       let articles: any[] = _.values(randomSection.articles);
       let maxArticleIndex: number = articles.length - 1;
-      this.randomArticle = articles[maxArticleIndex];
+      this.randomArticle = articles[_.random(maxArticleIndex)];
+    });
+  }
+
+  loadReadStatus() {
+    this.readProgressService.getReadStatus('it').subscribe((readStatus: any) => {
+      this.readArticlesCount = readStatus.complete.length;
     });
   }
 
@@ -62,6 +72,10 @@ export class HomePage implements OnInit {
     this.navCtrl.push(ArticlePage, {
       article: article
     })
+  }
+
+  ionViewDidEnter() {
+    this.loadReadStatus();
   }
 
 }

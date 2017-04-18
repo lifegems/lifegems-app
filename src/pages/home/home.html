@@ -7,12 +7,13 @@
 <ion-content>
   <div padding>
     <h2>Life Gems Dashboard</h2>
-    <p *ngIf="getTagCount()">Tags created: {{ getTagCount() }}</p>
-    <p *ngIf="getTaggedArticlesCount()">Articles tagged: {{ getTaggedArticlesCount() }}</p>
-    <p *ngIf="articlesCount">Insight articles: {{ articlesCount }}</p>
+    <p text-center>{{ readArticlesCount }} <progress max="4779" value="50"></progress> {{ articlesCount }}</p>
   </div>
   <ion-list>
-    <ion-list-header>Insight Article</ion-list-header>
+    <ion-list-header>
+      Insight Article
+      <a (click)="loadRandomArticle()"><ion-icon name="md-shuffle"></ion-icon></a>
+    </ion-list-header>
     <button *ngIf="randomArticle" ion-item (click)="viewArticle(randomArticle)">{{ randomArticle.title }}</button>
   </ion-list>
 </ion-content>

@@ -4,6 +4,7 @@ import { Storage } from '@ionic/storage';
 
 import { InsightService } from '../../../insight.service';
 import { TagsService } from '../../../tags.service';
+import { ReadProgressService } from '../../../read-progress.service';
 import { Tag, TagListPage } from '../tag-list';
 import { ArticleTagsModal } from '../modals';
 
@@ -23,7 +24,8 @@ export class ArticlePage implements OnInit {
       private navParams: NavParams, 
       public insightService: InsightService, 
       private storage: Storage,
-      private tagsService: TagsService, 
+      private tagsService: TagsService,
+      private readProgressService: ReadProgressService,
       public modalCtrl: ModalController,
       private toastCtrl: ToastController) {
     this.article = this.navParams.get('article');
@@ -33,6 +35,7 @@ export class ArticlePage implements OnInit {
   ngOnInit() {
     this.loadArticle();
     this.loadTags();
+    this.loadReadStatus();
   }
 
   loadArticle() {
@@ -51,6 +54,12 @@ export class ArticlePage implements OnInit {
     });
   }
 
+  loadReadStatus() {
+    this.readProgressService.isArticleRead('it', this.article.title).subscribe((isRead: boolean) => {
+      this.isRead = isRead;
+    });
+  }
+
   loadTags() {
     this.tagsService.getArticleTags(this.article.title).subscribe(tags => {
       this.tags = tags;
@@ -59,6 +68,7 @@ export class ArticlePage implements OnInit {
 
   markAsRead() {
     this.isRead = !this.isRead;
+    this.readProgressService.saveReadStatus('it', this.article.title, this.isRead);
     let toast = this.toastCtrl.create({
       message: (this.isRead) ? "Marked as read" : "Marked as unread",
       duration: 1000,
