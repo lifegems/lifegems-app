@@ -4,9 +4,15 @@
   </ion-navbar>
 </ion-header>
 
-<ion-content padding>
-  <h2>Welcome to the Life Gems app!</h2>
-  <p>
-    Use these study tools for in-depth Bible research and tracking your progress through various books.
-  </p>
+<ion-content>
+  <div padding>
+    <h2>Life Gems Dashboard</h2>
+    <p *ngIf="getTagCount()">Tags created: {{ getTagCount() }}</p>
+    <p *ngIf="getTaggedArticlesCount()">Articles tagged: {{ getTaggedArticlesCount() }}</p>
+    <p *ngIf="articlesCount">Insight articles: {{ articlesCount }}</p>
+  </div>
+  <ion-list>
+    <ion-list-header>Insight Article</ion-list-header>
+    <button *ngIf="randomArticle" ion-item (click)="viewArticle(randomArticle)">{{ randomArticle.title }}</button>
+  </ion-list>
 </ion-content>
