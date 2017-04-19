@@ -88,7 +88,6 @@ export class ArticleTagsModal implements OnInit {
         article: tag.article,
         isSelected: true
       });
-      this.tagsService.saveTag(tag);
    }
    
    dismiss() {
@@ -120,12 +119,7 @@ export class ArticleTagsModal implements OnInit {
        let oTag = new Tag(tag.name, tag.article);
        return oTag;
      });
-     let deleteTags = _.map(_.filter(this.tags, tag => tag.isSelected === false), tag => {
-       let oTag = new Tag(tag.name, tag.article);
-       return oTag;
-     });
-     this.tagsService.saveTags(saveTags);
-     this.tagsService.deleteTags(deleteTags);
+     this.tagsService.updateArticleTags(saveTags, this.article.title);
      this.viewCtrl.dismiss();
    }
 

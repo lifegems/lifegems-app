@@ -39,33 +39,50 @@ export class TagsService {
   }
 
   saveTags(tags: Tag[]) {
-    _.each(tags, tag => {
-      this.saveTag(tag);
+    this.storage.get('tags').then(data => {
+      let oTags = (data && data.tags) ? data : {tags:[]};
+      _.each(tags, tag => {
+        if (_.indexOf(oTags.tags, tag.toString()) === -1) {
+          oTags.tags.push(tag.toString());
+        }
+      });
+      console.log("Saving.. ", oTags);
+      this.storage.set('tags', oTags);
     });
   }
 
   saveTag(tag: Tag) {
-    this.storage.get('tags').then(data => {
-      let oTags = (data && data.tags) ? data : {tags:[]};
-      if (_.indexOf(oTags.tags, tag.toString()) === -1) {
-        oTags.tags.push(tag.toString());
-        this.storage.set('tags', oTags);
-      }
-    });
+    // this.saveTags([tag]);
   }
 
   deleteTags(tags: Tag[]) {
-    _.each(tags, tag => {
-      this.deleteTag(tag);
+    this.storage.get('tags').then(data => {
+      let oTags = data.tags;
+      _.each(tags, tag => {
+        if (_.indexOf(oTags, tag.toString()) > -1) {
+          oTags = _.filter(oTags, item => (tag.toString() !== item));
+        }
+      });
+      console.log("Deleting..", oTags);
+      this.storage.set('tags', {tags:oTags});     
     });
   }
 
   deleteTag(tag: Tag) {
+    // this.deleteTags([tag]);
+  }
+
+  updateArticleTags(newArticleTags: Tag[], article: string) {
     this.storage.get('tags').then(data => {
-      if (_.indexOf(data.tags, tag.toString()) > -1) {
-        let oTags = _.filter(data.tags, item => (tag.toString() !== item));
-        this.storage.set('tags', {tags:oTags});
-      }
+      let allTags = (data && data.tags) ? data : {tags:[]};
+      let otherArticleTags = _.filter(allTags.tags, tag => {
+        let aTag = tag.split("."); 
+        return (aTag[1] !== article);
+      });
+      _.each(newArticleTags, tag => {
+        otherArticleTags.push(tag.toString());
+      });
+      this.storage.set('tags', {tags: otherArticleTags});
     });
   }
    
