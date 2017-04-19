@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { NavController } from 'ionic-angular';
 
-import { Storage } from '@ionic/storage';
+import { TagsService } from '../tags.service';
 
 @Component({
   selector: 'page-settings',
@@ -9,13 +9,15 @@ import { Storage } from '@ionic/storage';
 })
 export class SettingsPage {
 
-  constructor(public navCtrl: NavController, public storage: Storage) {
+  constructor(public navCtrl: NavController, public tagsService: TagsService) {
 
   }
 
   resetTags() {
-     let tags = {tags: []};
-     this.storage.set('tags', tags);
+    let isDelete = confirm("Are you sure you want to delete all tags? This can not be reversed.");
+    if (isDelete) {
+      this.tagsService.resetTags();
+    }
   }
 
 }

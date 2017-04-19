@@ -6,10 +6,12 @@
 </ion-header>
 
 <ion-content>
-  <!--<ion-searchbar (ionInput)="filterItems($event)"></ion-searchbar>-->
   <ion-item-group>
     <div *ngFor="let tag of tags">
-      <button ion-item (click)="showArticle(tag.article)">{{tag.article}}</button>
+      <button ion-item (click)="showArticle(tag.article)">
+        <ion-icon *ngIf="tag.article.isRead" color="secondary" name="md-checkmark-circle"></ion-icon>
+        {{tag.article.title}}
+      </button>
     </div>
   </ion-item-group>
 </ion-content>
