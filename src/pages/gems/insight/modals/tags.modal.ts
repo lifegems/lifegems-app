@@ -23,7 +23,7 @@ import { TagsService } from '../../../tags.service';
    <ion-content>
      <ion-list>
       <button ion-item *ngFor="let tag of tags" (click)="showArticles(tag)">
-        {{tag.name}}
+        {{tag.name}} ({{tag.count}})
       </button>
      </ion-list>
    </ion-content>
@@ -38,14 +38,19 @@ export class TagsModal implements OnInit {
    ngOnInit() {
       console.log("tags");
       this.tagsService.getTags().subscribe(data => {
-        this.tags = _.uniq(_.sortBy(_.map(data, tag => {
+        this.tags = _.sortBy(_.map(data, tag => {
           let aTag = tag.split(".");
           let oTag = {
             name: aTag[0],
             article: aTag[1]
           }
           return oTag;
-        }), tag => tag.name), tag => tag.name);
+        }), tag => tag.name);
+        this.tags = _.map(this.tags, data => {
+          data.count = _.filter(this.tags, tag => data.name === tag.name).length;
+          return data;
+        });
+        this.tags = _.uniq(this.tags, tag => tag.name);
       });
    }
    
