@@ -31,7 +31,10 @@ export class InsightPage implements OnInit {
 
   ngOnInit() {
     this.insightService.getSections().subscribe(data => {
-      this.sections = _.values(data);
+      this.sections = _.map(_.values(data), section => {
+        section.count = _.values(section.articles).length;
+        return section;
+      });
     });
     this.readProgressService.getReadStatus('it').subscribe((readStatus: any) => {
       this.readArticles = _.sortBy(_.map(readStatus.complete, (reference: string) => {

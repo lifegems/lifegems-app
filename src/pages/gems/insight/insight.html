@@ -17,7 +17,7 @@
   <div [ngSwitch]="articlesView">
     <ion-item-group *ngSwitchCase="'alpha'">
       <div *ngFor="let section of sections">
-        <button ion-item (click)="showSection(section)">{{section.title}}</button>
+        <button ion-item (click)="showSection(section)">{{section.title}} ({{section.count}})</button>
       </div>
     </ion-item-group>
     <ion-item-group *ngSwitchCase="'read'">
