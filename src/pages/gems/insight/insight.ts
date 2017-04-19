@@ -3,6 +3,7 @@ import { NavController, ModalController } from 'ionic-angular';
 
 import { InsightService } from '../../insight.service';
 import { TagsService } from '../../tags.service';
+import { ReadProgressService } from '../../read-progress.service';
 import { ArticlePage } from './article';
 import { TopicListPage } from './topic-list';
 import { TagsModal } from './modals';
@@ -16,18 +17,28 @@ import * as _ from 'underscore';
 export class InsightPage implements OnInit {
   allArticles: any;
   articles: any;
-  unreadArticles: any;
+  articlesView: string;
+  readArticles: any;
   tags: any;
   sections: any[];
 
   constructor(public navCtrl: NavController, 
-      public insightService: InsightService, 
+      public insightService: InsightService,
+      public readProgressService: ReadProgressService,
       public modalCtrl: ModalController) {
+      this.articlesView = 'alpha';
   }
 
   ngOnInit() {
     this.insightService.getSections().subscribe(data => {
       this.sections = _.values(data);
+    });
+    this.readProgressService.getReadStatus('it').subscribe((readStatus: any) => {
+      this.readArticles = _.sortBy(_.map(readStatus.complete, (reference: string) => {
+        return {
+          title: reference
+        };
+      }), article => article.title);
     });
   }
 

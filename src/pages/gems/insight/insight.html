@@ -10,9 +10,20 @@
 </ion-header>
 
 <ion-content>
-  <ion-item-group>
-    <div *ngFor="let section of sections">
-      <button ion-item (click)="showSection(section)">{{section.title}}</button>
-    </div>
-  </ion-item-group>
+  <ion-segment [(ngModel)]="articlesView" padding>
+    <ion-segment-button value="alpha">A-Z</ion-segment-button>
+    <ion-segment-button value="read">Read</ion-segment-button>
+  </ion-segment>
+  <div [ngSwitch]="articlesView">
+    <ion-item-group *ngSwitchCase="'alpha'">
+      <div *ngFor="let section of sections">
+        <button ion-item (click)="showSection(section)">{{section.title}}</button>
+      </div>
+    </ion-item-group>
+    <ion-item-group *ngSwitchCase="'read'">
+      <div *ngFor="let article of readArticles">
+        <button ion-item (click)="showArticle(article)">{{article.title}}</button>
+      </div>
+    </ion-item-group>
+  </div>
 </ion-content>
