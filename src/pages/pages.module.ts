@@ -6,6 +6,7 @@ import { GemsModule } from './gems';
 import { HomePage } from './home/home';
 import { SettingsPage } from './settings/settings';
 import { InsightService } from './insight.service';
+import { BibleService } from './bible.service';
 import { ReadProgressService } from './read-progress.service';
 import { TagsService } from './tags.service';
 
@@ -26,6 +27,7 @@ import { TagsService } from './tags.service';
     GemsModule
   ],
   providers: [
+    BibleService,
     InsightService,
     ReadProgressService,
     TagsService

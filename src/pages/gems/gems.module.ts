@@ -3,6 +3,8 @@ import { IonicApp, IonicModule, IonicErrorHandler } from 'ionic-angular';
 
 import { GemsPage } from './gems';
 import { InsightModule } from './insight';
+import { SchedulesModule } from './schedules';
+
 
 @NgModule({
   declarations: [
@@ -14,7 +16,8 @@ import { InsightModule } from './insight';
   ],
   imports: [
     IonicModule,
-    InsightModule
+    InsightModule,
+    SchedulesModule
   ],
   providers: []
 })

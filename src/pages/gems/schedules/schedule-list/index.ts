@@ -1,0 +1,1 @@
+export { ScheduleListPage } from './schedule-list.page';

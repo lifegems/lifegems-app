@@ -1,0 +1,22 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>Bible Reading Schedule</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content>
+  <ion-segment [(ngModel)]="scheduleView" padding>
+     <ion-segment-button value="schedules">Schedules</ion-segment-button>
+     <ion-segment-button value="bible">Bible</ion-segment-button>
+  </ion-segment>
+  <div [ngSwitch]="scheduleView">
+     <ion-list *ngSwitchCase="'schedules'">
+        <button ion-item>Chronological</button>
+     </ion-list>
+  </div>
+  <div [ngSwitch]="scheduleView">
+     <ion-list *ngSwitchCase="'bible'">
+        <button *ngFor="let book of Bible" ion-item>{{ book.Name }}</button>
+     </ion-list>
+  </div>
+</ion-content>
