@@ -71,13 +71,13 @@ export class ArticleTagsModal implements OnInit {
          let articleTags = _.pluck(_.filter(tags, tag => {
             return tag.article === this.article.title;
          }), 'name');
-         this.tags = _.map(allTags, tag => {
+         this.tags = _.sortBy(_.map(allTags, tag => {
             return {
                name: tag,
                article: this.article.title,
                isSelected: (_.indexOf(articleTags, tag) > -1) 
             };
-         });
+         }), tag => tag.name);
       });
    }
 
